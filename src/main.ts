@@ -18,6 +18,7 @@ interface Sizes {
  */
 // Debug
 const gui = new GUI();
+gui.hide();
 
 // Canvas
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
