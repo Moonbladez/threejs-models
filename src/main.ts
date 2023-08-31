@@ -36,7 +36,7 @@ dracoLoader.setDecoderPath("/draco/");
 let mixer: THREE.AnimationMixer;
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
-gltfLoader.load("/models/Knight.glb", (gltf) => {
+gltfLoader.load("/models/Characters/Knight.glb", (gltf) => {
   console.log(gltf);
   mixer = new THREE.AnimationMixer(gltf.scene);
   const walking = mixer.clipAction(gltf.animations[73]);
