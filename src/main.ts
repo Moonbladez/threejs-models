@@ -12,6 +12,11 @@ interface Sizes {
   width: number;
   height: number;
 }
+/**
+ * Loaders
+ */
+const gltfLoader = new GLTFLoader();
+const cubeTextureLoader = new THREE.CubeTextureLoader();
 
 /**
  * Base
@@ -29,15 +34,27 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color("#87CEEB");
 
 /**
+ * Environent Map
+ */
+const environmentMap = cubeTextureLoader.load([
+  "/environmentMaps/0/px.png",
+  "/environmentMaps/0/nx.png",
+  "/environmentMaps/0/py.png",
+  "/environmentMaps/0/ny.png",
+  "/environmentMaps/0/pz.png",
+  "/environmentMaps/0/nz.png",
+]);
+
+scene.background = environmentMap;
+scene.environment = environmentMap;
+/**
  * Models
  */
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath("/draco/");
 let mixer: THREE.AnimationMixer;
-const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
 gltfLoader.load("/models/Characters/Barbarian.glb", (gltf) => {
-  console.log(gltf);
   mixer = new THREE.AnimationMixer(gltf.scene);
   const walking = mixer.clipAction(gltf.animations[72]);
   walking.play();
